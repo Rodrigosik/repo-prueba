@@ -6,6 +6,7 @@
       formControlName="clientName"
       placeholder="Ingresa tu nombre"
       [readonly]="_isReadOnly()"
+      freyInputValidation="name"
     />
   </frey-field>
   <frey-field>
@@ -15,6 +16,7 @@
       formControlName="petName"
       placeholder="Ingresa el nombre de tu mascota"
       [readonly]="_isReadOnly()"
+      freyInputValidation="name"
     />
   </frey-field>
 
@@ -51,6 +53,7 @@
       formControlName="reason"
       placeholder="Ingresa la razón de la cita"
       [readonly]="_isReadOnly()"
+      freyInputValidation
     ></textarea>
   </frey-field>
 

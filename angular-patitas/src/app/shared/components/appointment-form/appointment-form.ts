@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, output, signal } from '@angular/co
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FreyDatepickerModule } from 'freya/datepicker';
 import { FreyFormModule } from 'freya/form';
+import { FreyInputValidationDirective } from 'freya/input-validation';
 import { FreyTimepickerComponent } from 'freya/timepicker';
 import { Appointment } from 'src/app/core/services';
 import { parseFechaYYYYMMDDToDate } from 'src/app/utils/helpers';
@@ -18,6 +19,7 @@ export class AppointmentModalData {
     FreyFormModule,
     FreyTimepickerComponent,
     FreyDatepickerModule,
+    FreyInputValidationDirective,
   ],
   templateUrl: './appointment-form.html',
   styleUrl: './appointment-form.scss',
