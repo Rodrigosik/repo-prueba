@@ -1,0 +1,89 @@
+$color-bg: #f8fafd;
+$color-accent-1: #027499;
+$color-accent-2: #f7d6e0;
+$color-title: #222;
+$color-highlight: #5570b5;
+$circle1-size: 600px;
+$circle2-size: 400px;
+$circle1-pos-x: -200px;
+$circle1-pos-y: -150px;
+$circle2-pos-x: -120px;
+$circle2-pos-y: -100px;
+
+:host {
+  width: 100%;
+  padding: 40px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: $color-bg;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+  &::before {
+    width: $circle1-size;
+    height: $circle1-size;
+    left: $circle1-pos-x;
+    top: $circle1-pos-y;
+    background: $color-accent-1;
+  }
+  &::after {
+    width: $circle2-size;
+    height: $circle2-size;
+    right: $circle2-pos-x;
+    bottom: $circle2-pos-y;
+    background: $color-accent-2;
+  }
+}
+
+.appointment {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+  flex-direction: row;
+}
+
+.appointment__cat {
+  width: 50%;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.appointment__description {
+  height: 150px;
+}
+
+.appointment__form {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .appointment__cat {
+    display: none;
+  }
+}

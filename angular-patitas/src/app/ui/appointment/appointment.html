@@ -1,0 +1,35 @@
+<div class="appointment">
+  <img src="images/cat2.png" alt="Ilustración de un gato" class="appointment__cat" />
+
+  <div class="appointment__form">
+    <h1>Agendar Cita</h1>
+    <span>Por favor, completa el formulario para agendar una cita.</span>
+    <form [formGroup]="formGroup" class="card">
+      <frey-field>
+        <frey-label>Nombre del Cliente</frey-label>
+        <input freyInput formControlName="clientName" placeholder="Ingresa tu nombre" />
+      </frey-field>
+      <frey-field>
+        <frey-label>Nombre de la Mascota</frey-label>
+        <input
+          freyInput
+          formControlName="petName"
+          placeholder="Ingresa el nombre de tu mascota"
+        />
+      </frey-field>
+      <frey-field>
+        <frey-label>Razón de la cita</frey-label>
+
+        <textarea
+          class="appointment__description"
+          freyTextarea
+          name="description"
+          id="description"
+          formControlName="description"
+          placeholder="Ingresa la razón de la cita"
+        ></textarea>
+      </frey-field>
+      <button class="home__btn-agendar" freyButton (click)="onSubmit()">Agendar</button>
+    </form>
+  </div>
+</div>
