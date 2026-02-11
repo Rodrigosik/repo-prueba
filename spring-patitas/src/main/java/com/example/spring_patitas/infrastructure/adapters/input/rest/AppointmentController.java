@@ -7,6 +7,7 @@ import com.example.spring_patitas.application.usecases.GetAllAppointmentsUseCase
 import com.example.spring_patitas.application.usecases.GetAppointmentUseCase;
 import com.example.spring_patitas.application.usecases.UpdateAppointmentStatusUseCase;
 import com.example.spring_patitas.domain.enums.AppointmentStatus;
+import com.example.spring_patitas.infrastructure.config.dto.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,7 +37,8 @@ public class AppointmentController {
     @PostMapping
     @Operation(
         summary = "Crear una nueva cita",
-        description = "Crea una nueva cita veterinaria con los datos del cliente, mascota y motivo de la consulta"
+        description = "Crea una nueva cita veterinaria con los datos del cliente, mascota y motivo de la consulta. " +
+                     "Las citas solo pueden agendarse en intervalos de 30 minutos (09:00, 09:30, 10:00, etc.)"
     )
     @ApiResponses(value = {
         @ApiResponse(
@@ -46,7 +48,13 @@ public class AppointmentController {
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Datos de entrada inválidos"
+            description = "Datos de entrada inválidos o horario no permitido (debe ser en intervalos de 30 minutos)",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+        ),
+        @ApiResponse(
+            responseCode = "409",
+            description = "Ya existe una cita programada para la fecha y hora especificada",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     public ResponseEntity<AppointmentResponse> createAppointment(
@@ -68,7 +76,8 @@ public class AppointmentController {
         ),
         @ApiResponse(
             responseCode = "404",
-            description = "Cita no encontrada"
+            description = "Cita no encontrada",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     public ResponseEntity<AppointmentResponse> getAppointment(
@@ -107,7 +116,8 @@ public class AppointmentController {
         ),
         @ApiResponse(
             responseCode = "404",
-            description = "Cita no encontrada"
+            description = "Cita no encontrada",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     public ResponseEntity<AppointmentResponse> updateAppointmentStatus(

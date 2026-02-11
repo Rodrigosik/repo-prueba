@@ -51,4 +51,10 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         
         return mapper.toDomain(updatedEntity);
     }
+    
+    @Override
+    public Optional<Appointment> findByDateAndTime(java.time.LocalDate date, java.time.LocalTime time) {
+        return jpaRepository.findByDateAndTime(date, time)
+                .map(mapper::toDomain);
+    }
 }

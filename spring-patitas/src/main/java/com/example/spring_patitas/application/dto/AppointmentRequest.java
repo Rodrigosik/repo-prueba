@@ -36,7 +36,7 @@ public class AppointmentRequest {
     private LocalDate date;
     
     @NotNull(message = "Time is required")
-    @Schema(description = "Hora de la cita", example = "10:30:00", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Hora de la cita (solo se permiten intervalos de 30 minutos: 09:00, 09:30, 10:00, etc.)", example = "10:30:00", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalTime time;
     
     @Schema(description = "Estado inicial de la cita (por defecto PENDING)", example = "PENDING", allowableValues = {"PENDING", "CONFIRMED", "IN_PROGRESS", "COMPLETED", "CANCELLED"})
