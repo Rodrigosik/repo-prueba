@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./ui/appointment/appointment').then(m => m.Appointment),
   },
   {
+    path: 'lista',
+    loadComponent: () => import('./ui/list/list').then(m => m.List),
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'home',

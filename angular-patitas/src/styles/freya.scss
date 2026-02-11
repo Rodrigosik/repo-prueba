@@ -12,3 +12,11 @@
   --frey-color-primary-active: #cc8400;
   --frey-shadow-primary: 0 0 0 2px rgba(255, 167, 51, 0.5);
 }
+
+frey-table thead {
+  background: var(--frey-color-primary);
+}
+
+frey-table thead th {
+  color: white;
+}

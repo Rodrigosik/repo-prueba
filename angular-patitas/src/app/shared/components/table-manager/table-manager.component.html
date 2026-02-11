@@ -1,0 +1,14 @@
+<div class="table-manager">
+  <div class="table-manager__body">
+    <ng-content select="frey-table"></ng-content>
+
+    <frey-paginator
+      class="table-manager__paginator mt-4"
+      [totalItems]="totalItems()"
+      [itemsPerPage]="itemsPerPage()"
+      [currentPage]="currentPage()"
+      (pageChange)="currentPage.set($event)"
+      (itemsPerPageChange)="itemsPerPage.set($event)"
+    ></frey-paginator>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div>
+  <h1>Lista de Citas</h1>
+  <span>Consulta y gestiona las citas agendadas en el sistema.</span>
+</div>
+<div>
+  <frey-table-manager [dataSource]="dataSource$$()">
+    <frey-table>
+      <ng-container freyColumnDef="clientName">
+        <th *freyHeaderCellDef freyColumnSort>
+          <span>Nombre del cliente</span>
+        </th>
+        <td *freyCellDef="let item">
+          <div>{{ item.clientName }}</div>
+        </td>
+      </ng-container>
+      <ng-container freyColumnDef="petName">
+        <th *freyHeaderCellDef freyColumnSort>
+          <span>Nombre de la mascota</span>
+        </th>
+        <td *freyCellDef="let item">
+          <div>{{ item.petName }}</div>
+        </td>
+      </ng-container>
+      <ng-container freyColumnDef="description">
+        <th *freyHeaderCellDef freyColumnSort style="width: 300px">
+          <span>Descripción</span>
+        </th>
+        <td *freyCellDef="let item">
+          <div>
+            {{ item.description?.length > 70 ? (item.description | slice:0:70) + '...' :
+            item.description }}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container freyColumnDef="date">
+        <th *freyHeaderCellDef freyColumnSort class="text-center">
+          <span>Fecha</span>
+        </th>
+        <td *freyCellDef="let item" class="text-center">
+          <div>{{ item.date | date: 'dd/MM/yy' }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container freyColumnDef="time">
+        <th *freyHeaderCellDef freyColumnSort class="text-center">
+          <span>Hora</span>
+        </th>
+        <td *freyCellDef="let item" class="text-center">
+          <div>{{ item.time | date: 'hh:mm a' }}</div>
+        </td>
+      </ng-container>
+
+      <ng-container freyColumnDef="status">
+        <th *freyHeaderCellDef freyColumnSort class="text-center">
+          <span>Estado</span>
+        </th>
+        <td *freyCellDef="let item" class="text-center">
+          <span
+            class="chip"
+            [ngClass]="
+                    item.status ? 'chip--green' : 'chip--red'
+                  "
+          >
+            {{ item.status ? 'Atendida' : 'No atendida' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container freyColumnDef="acciones">
+        <th *freyHeaderCellDef class="text-center">
+          <span>Acciones</span>
+        </th>
+        <td *freyCellDef="let item">
+          <div class="table-actions">
+            <button freyButton variant="ghost" [iconOnly]="true">
+              <i class="ms-outlined">check_box</i>
+            </button>
+            <button freyButton variant="ghost" [iconOnly]="true">
+              <i class="ms-outlined">visibility</i>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+    </frey-table>
+  </frey-table-manager>
+</div>

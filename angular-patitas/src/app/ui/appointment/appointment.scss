@@ -1,15 +1,3 @@
-$color-bg: #f8fafd;
-$color-accent-1: #027499;
-$color-accent-2: #f7d6e0;
-$color-title: #222;
-$color-highlight: #5570b5;
-$circle1-size: 600px;
-$circle2-size: 400px;
-$circle1-pos-x: -200px;
-$circle1-pos-y: -150px;
-$circle2-pos-x: -120px;
-$circle2-pos-y: -100px;
-
 :host {
   width: 100%;
   padding: 40px;
@@ -18,32 +6,7 @@ $circle2-pos-y: -100px;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: $color-bg;
   overflow: hidden;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.3;
-    z-index: 0;
-    pointer-events: none;
-  }
-  &::before {
-    width: $circle1-size;
-    height: $circle1-size;
-    left: $circle1-pos-x;
-    top: $circle1-pos-y;
-    background: $color-accent-1;
-  }
-  &::after {
-    width: $circle2-size;
-    height: $circle2-size;
-    right: $circle2-pos-x;
-    bottom: $circle2-pos-y;
-    background: $color-accent-2;
-  }
 }
 
 .appointment {
