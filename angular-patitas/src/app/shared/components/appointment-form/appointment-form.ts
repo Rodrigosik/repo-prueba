@@ -1,8 +1,12 @@
-import { Component, inject, OnInit, output } from '@angular/core';
+import { Component, computed, inject, OnInit, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FreyDatepickerModule } from 'freya/datepicker';
 import { FreyFormModule } from 'freya/form';
 import { FreyTimepickerComponent } from 'freya/timepicker';
+
+export class AppointmentModalData {
+  isReadOnly = signal(false);
+}
 
 @Component({
   selector: 'app-appointment-form',
@@ -16,8 +20,13 @@ import { FreyTimepickerComponent } from 'freya/timepicker';
   styleUrl: './appointment-form.scss',
 })
 export class AppointmentForm implements OnInit {
+  dataSource: AppointmentModalData = null;
+
   formGroup: FormGroup;
+  isReadOnly = signal<boolean>(false);
   formGroupOutput = output<FormGroup>();
+
+  _isReadOnly = computed(() => this.dataSource?.isReadOnly() || this.isReadOnly());
 
   private readonly formBuilder = inject(FormBuilder);
 

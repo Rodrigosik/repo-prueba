@@ -12,6 +12,7 @@ import {
 import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/core/services';
 import { AppointmentForm, TableManagerComponent } from 'src/app/shared/components';
+import { AppointmentModalData } from 'src/app/shared/components/appointment-form/appointment-form';
 
 interface Appointment {
   clientName: string;
@@ -145,7 +146,8 @@ export class List {
   onModalForm(data): Observable<any> {
     const config = new FreyModalConfigModel();
     config.customWidth.large = 30;
-    config.dataSource = data;
+    config.dataSource = new AppointmentModalData();
+    config.dataSource.isReadOnly.set(true);
     return this.modalService.openModal(AppointmentForm, config) as Observable<any>;
   }
 

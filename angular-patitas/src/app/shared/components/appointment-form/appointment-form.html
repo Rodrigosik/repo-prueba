@@ -1,7 +1,12 @@
 <form [formGroup]="formGroup">
   <frey-field>
-    <frey-label>Nombre del Cliente</frey-label>
-    <input freyInput formControlName="clientName" placeholder="Ingresa tu nombre" />
+    <frey-label>Nombre del Cliente </frey-label>
+    <input
+      freyInput
+      formControlName="clientName"
+      placeholder="Ingresa tu nombre"
+      [readonly]="true"
+    />
   </frey-field>
   <frey-field>
     <frey-label>Nombre de la Mascota</frey-label>
@@ -9,6 +14,7 @@
       freyInput
       formControlName="petName"
       placeholder="Ingresa el nombre de tu mascota"
+      [readonly]="_isReadOnly()"
     />
   </frey-field>
 
@@ -17,10 +23,20 @@
       <i class="ms-filled">calendar_today</i>
     </frey-prefix>
     <frey-label>Fecha</frey-label>
-    <input freyInput formControlName="date" [freyDatepicker]="datepicker" />
+    <input
+      freyInput
+      formControlName="date"
+      [freyDatepicker]="datepicker"
+      [readonly]="_isReadOnly()"
+    />
   </frey-field>
 
-  <frey-timepicker formControlName="time" minTime="09:00:00" maxTime="18:00:00">
+  <frey-timepicker
+    formControlName="time"
+    minTime="09:00:00"
+    maxTime="18:00:00"
+    [readonly]="_isReadOnly()"
+  >
     <frey-label> Hora</frey-label>
   </frey-timepicker>
 
@@ -34,6 +50,7 @@
       id="description"
       formControlName="description"
       placeholder="Ingresa la razón de la cita"
+      [readonly]="_isReadOnly()"
     ></textarea>
   </frey-field>
 
