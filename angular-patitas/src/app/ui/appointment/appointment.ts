@@ -2,10 +2,16 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FreyButtonDirective } from 'freya/button';
 import { FreyFormModule } from 'freya/form';
+import { FreyTimepickerComponent } from 'freya/timepicker';
 
 @Component({
   selector: 'app-appointment',
-  imports: [ReactiveFormsModule, FreyFormModule, FreyButtonDirective],
+  imports: [
+    ReactiveFormsModule,
+    FreyFormModule,
+    FreyButtonDirective,
+    FreyTimepickerComponent,
+  ],
   templateUrl: './appointment.html',
   styleUrl: './appointment.scss',
 })
