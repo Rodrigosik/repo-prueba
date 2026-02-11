@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { FreyButtonDirective } from 'freya/button';
 import { FreyDatepickerModule } from 'freya/datepicker';
 import { FreyFormModule } from 'freya/form';
@@ -13,6 +14,7 @@ import { FreyTimepickerComponent } from 'freya/timepicker';
     FreyButtonDirective,
     FreyTimepickerComponent,
     FreyDatepickerModule,
+    RouterLink,
   ],
   templateUrl: './appointment.html',
   styleUrl: './appointment.scss',

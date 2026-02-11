@@ -43,6 +43,14 @@
         ></textarea>
       </frey-field>
       <button class="home__btn-agendar" freyButton (click)="onSubmit()">Agendar</button>
+      <button
+        class="home__btn-agendar"
+        freyButton
+        [variant]="'outline'"
+        routerLink="/home"
+      >
+        Cancelar
+      </button>
     </form>
   </div>
 </div>
