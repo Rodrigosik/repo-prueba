@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FreyButtonDirective } from 'freya/button';
+import { FreyDatepickerModule } from 'freya/datepicker';
 import { FreyFormModule } from 'freya/form';
 import { FreyTimepickerComponent } from 'freya/timepicker';
 
@@ -11,6 +12,7 @@ import { FreyTimepickerComponent } from 'freya/timepicker';
     FreyFormModule,
     FreyButtonDirective,
     FreyTimepickerComponent,
+    FreyDatepickerModule,
   ],
   templateUrl: './appointment.html',
   styleUrl: './appointment.scss',
@@ -38,6 +40,7 @@ export class Appointment {
       petName: ['', [Validators.required]],
       description: ['', [Validators.required]],
       date: ['', [Validators.required]],
+      time: ['09:00:00', [Validators.required]],
     });
   }
 }

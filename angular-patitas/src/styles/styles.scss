@@ -1,4 +1,5 @@
 @use 'freya';
+@use 'google-icons';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 html,
@@ -30,4 +31,13 @@ p {
 
 h1 {
   font-weight: 400;
+}
+
+.ms-filled {
+  cursor: pointer;
+  font-size: 24px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  color: var(--frey-color-primary);
 }

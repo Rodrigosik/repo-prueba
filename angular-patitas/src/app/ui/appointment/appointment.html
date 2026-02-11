@@ -18,8 +18,16 @@
         />
       </frey-field>
 
-      <frey-timepicker>
-        <frey-label> Hora de Apertura </frey-label>
+      <frey-field class="xs:col-12">
+        <frey-prefix (click)="datepicker.open()">
+          <i class="ms-filled">calendar_today</i>
+        </frey-prefix>
+        <frey-label>Fecha</frey-label>
+        <input freyInput formControlName="date" [freyDatepicker]="datepicker" />
+      </frey-field>
+
+      <frey-timepicker formControlName="time" minTime="09:00:00" maxTime="18:00:00">
+        <frey-label> Hora</frey-label>
       </frey-timepicker>
 
       <frey-field>
@@ -38,3 +46,5 @@
     </form>
   </div>
 </div>
+
+<frey-datepicker #datepicker> </frey-datepicker>
