@@ -33,6 +33,7 @@ export class AppointmentForm implements OnInit {
 
   _isReadOnly = computed(() => this.dataSource?.isReadOnly() || this.isReadOnly());
 
+  readonly minDate = signal(new Date(Date.now() - 24 * 60 * 60 * 1000));
   private readonly formBuilder = inject(FormBuilder);
 
   constructor() {
