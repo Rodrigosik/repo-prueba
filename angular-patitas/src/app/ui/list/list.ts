@@ -11,7 +11,11 @@ import {
 } from 'freya/table';
 import { Observable } from 'rxjs';
 import { AlertService, Appointment, AppointmentsService } from 'src/app/core/services';
-import { AppointmentForm, TableManagerComponent } from 'src/app/shared/components';
+import {
+  AppointmentForm,
+  ButtonBackComponent,
+  TableManagerComponent,
+} from 'src/app/shared/components';
 import { AppointmentModalData } from 'src/app/shared/components/appointment-form/appointment-form';
 
 @Component({
@@ -27,6 +31,7 @@ import { AppointmentModalData } from 'src/app/shared/components/appointment-form
     NgClass,
     DatePipe,
     SlicePipe,
+    ButtonBackComponent,
   ],
   templateUrl: './list.html',
   styleUrl: './list.scss',

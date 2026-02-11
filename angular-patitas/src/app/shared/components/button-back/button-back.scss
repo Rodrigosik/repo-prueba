@@ -1,0 +1,16 @@
+:host {
+  position: fixed;
+  top: 20px;
+  left: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ms-outlined {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
