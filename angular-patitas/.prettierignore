@@ -1,0 +1,8 @@
+# Prettier ignore rules
+node_modules
+/dist
+/build
+.angular
+.cache
+coverage
+package-lock.json
