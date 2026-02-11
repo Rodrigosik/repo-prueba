@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { FreyButtonDirective } from 'freya';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [FreyButtonDirective],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
-export class Home {
- 
-}
+export class Home {}

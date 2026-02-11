@@ -2,7 +2,7 @@ $color-bg: #f8fafd;
 $color-accent-1: #027499;
 $color-accent-2: #f7d6e0;
 $color-title: #222;
-$color-highlight: #0086a7;
+$color-highlight: #5570b5;
 $circle1-size: 600px;
 $circle2-size: 400px;
 $circle1-pos-x: -200px;
@@ -76,6 +76,10 @@ $circle2-pos-y: -100px;
     color: $color-highlight;
     display: block;
   }
+}
+
+.home__btn-agendar {
+  margin-top: 1.5rem;
 }
 
 @media (max-width: 768px) {

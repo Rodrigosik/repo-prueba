@@ -1,0 +1,11 @@
+@use 'node_modules/freya/styles/tokens/frey-tokens.scss';
+@use 'node_modules/freya/styles/table/table.scss';
+@use 'node_modules/freya/styles/paginator/paginator.scss';
+@use 'node_modules/freya/styles/button/button.scss';
+
+:root {
+  --frey-color-primary: #ffa733;
+  --frey-color-primary-hover: #ffd580;
+  --frey-color-primary-active: #cc8400;
+  --frey-shadow-primary: 0 0 0 2px rgba(255, 167, 51, 0.5);
+}
