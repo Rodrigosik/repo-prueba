@@ -42,7 +42,7 @@ export class AppointmentForm implements OnInit {
     this.formGroup = this.formBuilder.group({
       clientName: ['', [Validators.required]],
       petName: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      reason: ['', [Validators.required]],
       date: ['', [Validators.required]],
       time: ['09:00:00', [Validators.required]],
     });

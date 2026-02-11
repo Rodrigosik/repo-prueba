@@ -1,5 +1,5 @@
 import { DatePipe, NgClass, SlicePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FreyButtonDirective } from 'freya/button';
 import { FreyModalConfigModel, FreyModalService } from 'freya/modal';
 import {
@@ -10,7 +10,7 @@ import {
   FreyTableComponent,
 } from 'freya/table';
 import { Observable } from 'rxjs';
-import { AlertService } from 'src/app/core/services';
+import { AlertService, AppointmentsService } from 'src/app/core/services';
 import { AppointmentForm, TableManagerComponent } from 'src/app/shared/components';
 import { AppointmentModalData } from 'src/app/shared/components/appointment-form/appointment-form';
 
@@ -40,7 +40,7 @@ interface Appointment {
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
-export class List {
+export class List implements OnInit {
   dataSource$$ = signal<Appointment[]>([
     {
       clientName: 'Albaro',
@@ -130,6 +130,11 @@ export class List {
   // ===================================
   private readonly alertService = inject(AlertService);
   private readonly modalService = inject(FreyModalService);
+  private readonly appointmentsService = inject(AppointmentsService);
+
+  ngOnInit(): void {
+    this.getAppointments();
+  }
 
   onDelete(row: Appointment): void {
     console.log('Eliminar cita:', row);
@@ -149,6 +154,15 @@ export class List {
     config.dataSource = new AppointmentModalData();
     config.dataSource.isReadOnly.set(true);
     return this.modalService.openModal(AppointmentForm, config) as Observable<any>;
+  }
+
+  private getAppointments(): void {
+    this.appointmentsService.getAppointments().subscribe({
+      next: response => {
+        // this.dataSource$$.set(response);
+        console.log(response);
+      },
+    });
   }
 
   // private deleteEvento(id: number): void {
