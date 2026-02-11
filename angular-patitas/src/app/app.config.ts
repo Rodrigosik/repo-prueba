@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { FreyLoaderInterceptor } from 'freya/loader';
 import { routes } from './app.routes';
-import { requestInterceptor } from './core/interceptors';
+import { requestInterceptor, responseInterceptor } from './core/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withInterceptors([requestInterceptor, FreyLoaderInterceptor])
+      withInterceptors([requestInterceptor, responseInterceptor, FreyLoaderInterceptor])
     ),
   ],
 };
