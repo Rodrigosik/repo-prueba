@@ -1,7 +1,7 @@
 import { DatePipe, NgClass, SlicePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FreyButtonDirective } from 'freya/button';
-import { FreyModalService } from 'freya/modal';
+import { FreyModalConfigModel, FreyModalService } from 'freya/modal';
 import {
   FreyCellDefDirective,
   FreyColumnDefDirective,
@@ -9,8 +9,9 @@ import {
   FreyHeaderCellDefDirective,
   FreyTableComponent,
 } from 'freya/table';
+import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/core/services';
-import { TableManagerComponent } from 'src/app/shared/components';
+import { AppointmentForm, TableManagerComponent } from 'src/app/shared/components';
 
 interface Appointment {
   clientName: string;
@@ -141,19 +142,12 @@ export class List {
       });
   }
 
-  // onModalForm(data): Observable<any> {
-  //   const config = new FreyModalConfigModel();
-  //   config.customWidth.large = 40;
-  //   config.customWidth.medium = 60;
-  //   config.customWidth.small = 80;
-  //   config.dataSource = data;
-
-  //   // config.hasButtonClose = false;
-  //   return this.modalService.openModal(
-  //     FormBandejaComisionesComponent,
-  //     config
-  //   ) as Observable<any>;
-  // }
+  onModalForm(data): Observable<any> {
+    const config = new FreyModalConfigModel();
+    config.customWidth.large = 30;
+    config.dataSource = data;
+    return this.modalService.openModal(AppointmentForm, config) as Observable<any>;
+  }
 
   // private deleteEvento(id: number): void {
   //   this.eventosService.deleteEvento(id).subscribe({

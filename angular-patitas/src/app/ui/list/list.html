@@ -76,7 +76,12 @@
             <button freyButton variant="ghost" [iconOnly]="true" (click)="onDelete(item)">
               <i class="ms-outlined">check_box</i>
             </button>
-            <button freyButton variant="ghost" [iconOnly]="true">
+            <button
+              freyButton
+              variant="ghost"
+              [iconOnly]="true"
+              (click)="onModalForm(item)"
+            >
               <i class="ms-outlined">visibility</i>
             </button>
           </div>

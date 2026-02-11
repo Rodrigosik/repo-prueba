@@ -6,6 +6,7 @@
 @use 'node_modules/freya/styles/timepicker/timepicker.scss';
 @use 'node_modules/freya/styles/datepicker/datepicker.scss';
 @use 'node_modules/freya/styles/alert/alert.scss';
+@use 'node_modules/freya/styles/modal/modal.scss';
 
 :root {
   --frey-color-primary: #ffa733;
@@ -20,4 +21,35 @@ frey-table thead {
 
 frey-table thead th {
   color: white;
+}
+
+frey-modal .modal__body {
+  border-radius: 7px;
+}
+
+frey-modal .modal__cross:after {
+  content: '\d7';
+  color: var(--cross-color);
+  position: absolute;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  top: -7px;
+  right: -7px;
+  cursor: pointer;
+}
+
+frey-modal .modal__cross:before {
+  content: ' ';
+  position: absolute;
+  top: -0.625rem;
+  right: -0.625rem;
+  background: var(--frey-color-primary);
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  cursor: pointer;
 }
