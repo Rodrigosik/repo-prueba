@@ -1,5 +1,5 @@
 import { DatePipe, NgClass, SlicePipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FreyButtonDirective } from 'freya/button';
 import {
   FreyCellDefDirective,
@@ -8,6 +8,7 @@ import {
   FreyHeaderCellDefDirective,
   FreyTableComponent,
 } from 'freya/table';
+import { AlertService } from 'src/app/core/services';
 import { TableManagerComponent } from 'src/app/shared/components';
 
 interface Appointment {
@@ -124,18 +125,19 @@ export class List {
   // ===================================
   // 📦 Zona de Inyección de Servicios
   // ===================================
-  // private readonly roAlertService = inject(RoAlertService);
+  private readonly alertService = inject(AlertService);
 
-  // onDelete(row: EventoDto): void {
-  //   const title = `¿Eliminar el evento ${row.nombre}?`;
-  //   this.roAlertService
-  //     .warningAlert(title, 'Esta acción no se puede deshacer.')
-  //     .subscribe((result: boolean) => {
-  //       if (result) {
-  //         this.deleteEvento(row.id);
-  //       }
-  //     });
-  // }
+  onDelete(row: Appointment): void {
+    console.log('Eliminar cita:', row);
+    const title = `¿Eliminar la cita de ${row.clientName}?`;
+    this.alertService
+      .warningAlert(title, 'Esta acción no se puede deshacer.')
+      .subscribe((result: boolean) => {
+        if (result) {
+          // this.deleteEvento(row.id);
+        }
+      });
+  }
 
   // private deleteEvento(id: number): void {
   //   this.eventosService.deleteEvento(id).subscribe({

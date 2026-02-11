@@ -2,6 +2,7 @@
   "name": "angular-patitas",
   "version": "0.0.0",
   "scripts": {
+    "freya:install": "node .scripts/clean-install.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
