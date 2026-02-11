@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./ui/home/home').then(m => m.Home),
+    loadComponent: () => import('./ui/home/home').then(m => m.HomeComponent),
   },
   {
     path: 'agendar',
@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'lista',
-    loadComponent: () => import('./ui/list/list').then(m => m.List),
+    loadComponent: () => import('./ui/list/list').then(m => m.ListComponent),
   },
   {
     path: '**',

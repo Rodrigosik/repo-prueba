@@ -8,4 +8,4 @@ import { FreyButtonDirective } from 'freya';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
-export class Home {}
+export class HomeComponent {}

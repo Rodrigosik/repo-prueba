@@ -31,7 +31,7 @@ import { AppointmentModalData } from 'src/app/shared/components/appointment-form
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
-export class List implements OnInit {
+export class ListComponent implements OnInit {
   dataSource$$ = signal<Appointment[]>([]);
 
   // ===================================
@@ -45,21 +45,18 @@ export class List implements OnInit {
     this.getAppointments();
   }
 
-  onDelete(row: Appointment): void {
-    console.log('Eliminar cita:', row);
-    const title = `¿Eliminar la cita de ${row.clientName}?`;
+  onClose(row: Appointment): void {
+    const title = `¿Terminar la cita de ${row.clientName}?`;
     this.alertService
       .warningAlert(title, 'Esta acción no se puede deshacer.')
       .subscribe((result: boolean) => {
         if (result) {
-          // this.deleteEvento(row.id);
+          this.closeAppointment(row.id);
         }
       });
   }
 
   onModalForm(row: Appointment): Observable<any> {
-    console.log('Ver detalles de la cita:', row);
-
     const config = new FreyModalConfigModel();
     config.customWidth.large = 30;
     config.dataSource = new AppointmentModalData();
@@ -76,11 +73,15 @@ export class List implements OnInit {
     });
   }
 
-  // private deleteEvento(id: number): void {
-  //   this.eventosService.deleteEvento(id).subscribe({
-  //     next: () => {
-  //       this.getEventos();
-  //     },
-  //   });
-  // }
+  private closeAppointment(id: number): void {
+    this.appointmentsService.updateAppointmentStatus(id, 'COMPLETED').subscribe({
+      next: () => {
+        this.getAppointments();
+        this.alertService.successAlert(
+          'Cita terminada',
+          'La cita ha sido marcada como completada.'
+        );
+      },
+    });
+  }
 }

@@ -47,8 +47,7 @@
           <span>Hora</span>
         </th>
         <td *freyCellDef="let item" class="text-center">
-          <!-- <div>{{ item.time | date: 'hh:mm a' }}</div> -->
-          <div>{{ item.time }}</div>
+          <div>{{ ('1970-01-01T' + item.time) | date: 'hh:mm a' }}</div>
         </td>
       </ng-container>
 
@@ -60,10 +59,10 @@
           <span
             class="chip"
             [ngClass]="
-                    item.status ? 'chip--green' : 'chip--red'
+                    item.status ==='COMPLETED' ? 'chip--green' : 'chip--red'
                   "
           >
-            {{ item.status ? 'Atendida' : 'No atendida' }}
+            {{ item.status ==='COMPLETED' ? 'Atendida' : 'Pendiente' }}
           </span>
         </td>
       </ng-container>
@@ -74,7 +73,13 @@
         </th>
         <td *freyCellDef="let item">
           <div class="table-actions">
-            <button freyButton variant="ghost" [iconOnly]="true" (click)="onDelete(item)">
+            <button
+              freyButton
+              variant="ghost"
+              [iconOnly]="true"
+              (click)="onClose(item)"
+              [disabled]="item.status === 'COMPLETED'"
+            >
               <i class="ms-outlined">check_box</i>
             </button>
             <button
