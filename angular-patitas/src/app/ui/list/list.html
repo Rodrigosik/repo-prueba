@@ -21,14 +21,14 @@
           <div>{{ item.petName }}</div>
         </td>
       </ng-container>
-      <ng-container freyColumnDef="description">
+      <ng-container freyColumnDef="reason">
         <th *freyHeaderCellDef freyColumnSort style="width: 300px">
           <span>Descripción</span>
         </th>
         <td *freyCellDef="let item">
           <div>
-            {{ item.description?.length > 70 ? (item.description | slice:0:70) + '...' :
-            item.description }}
+            {{ item.reason?.length > 70 ? (item.reason | slice:0:70) + '...' : item.reason
+            }}
           </div>
         </td>
       </ng-container>
@@ -47,7 +47,8 @@
           <span>Hora</span>
         </th>
         <td *freyCellDef="let item" class="text-center">
-          <div>{{ item.time | date: 'hh:mm a' }}</div>
+          <!-- <div>{{ item.time | date: 'hh:mm a' }}</div> -->
+          <div>{{ item.time }}</div>
         </td>
       </ng-container>
 

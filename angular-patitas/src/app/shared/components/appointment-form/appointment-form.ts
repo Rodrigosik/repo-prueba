@@ -3,9 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FreyDatepickerModule } from 'freya/datepicker';
 import { FreyFormModule } from 'freya/form';
 import { FreyTimepickerComponent } from 'freya/timepicker';
+import { Appointment } from 'src/app/core/services';
+import { parseFechaYYYYMMDDToDate } from 'src/app/utils/helpers';
 
 export class AppointmentModalData {
   isReadOnly = signal(false);
+  formValue: Appointment;
 }
 
 @Component({
@@ -36,6 +39,13 @@ export class AppointmentForm implements OnInit {
 
   ngOnInit(): void {
     this.formGroupOutput.emit(this.formGroup);
+
+    if (this.dataSource && this.dataSource.formValue) {
+      this.formGroup.patchValue({
+        ...this.dataSource.formValue,
+        date: parseFechaYYYYMMDDToDate(this.dataSource.formValue.date),
+      });
+    }
   }
 
   private buildForm(): void {

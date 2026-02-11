@@ -7,7 +7,8 @@ export const routes: Routes = [
   },
   {
     path: 'agendar',
-    loadComponent: () => import('./ui/appointment/appointment').then(m => m.Appointment),
+    loadComponent: () =>
+      import('./ui/appointment/appointment').then(m => m.AppointmentComponent),
   },
   {
     path: 'lista',

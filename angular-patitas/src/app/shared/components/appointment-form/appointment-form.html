@@ -5,7 +5,7 @@
       freyInput
       formControlName="clientName"
       placeholder="Ingresa tu nombre"
-      [readonly]="true"
+      [readonly]="_isReadOnly()"
     />
   </frey-field>
   <frey-field>
