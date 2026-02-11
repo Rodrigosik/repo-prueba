@@ -4,44 +4,7 @@
   <div class="appointment__form">
     <h1>Agendar Cita</h1>
     <span>Por favor, completa el formulario para agendar una cita.</span>
-    <form [formGroup]="formGroup" class="card">
-      <frey-field>
-        <frey-label>Nombre del Cliente</frey-label>
-        <input freyInput formControlName="clientName" placeholder="Ingresa tu nombre" />
-      </frey-field>
-      <frey-field>
-        <frey-label>Nombre de la Mascota</frey-label>
-        <input
-          freyInput
-          formControlName="petName"
-          placeholder="Ingresa el nombre de tu mascota"
-        />
-      </frey-field>
-
-      <frey-field class="xs:col-12">
-        <frey-prefix (click)="datepicker.open()">
-          <i class="ms-filled">calendar_today</i>
-        </frey-prefix>
-        <frey-label>Fecha</frey-label>
-        <input freyInput formControlName="date" [freyDatepicker]="datepicker" />
-      </frey-field>
-
-      <frey-timepicker formControlName="time" minTime="09:00:00" maxTime="18:00:00">
-        <frey-label> Hora</frey-label>
-      </frey-timepicker>
-
-      <frey-field>
-        <frey-label>Razón de la cita</frey-label>
-
-        <textarea
-          class="appointment__description"
-          freyTextarea
-          name="description"
-          id="description"
-          formControlName="description"
-          placeholder="Ingresa la razón de la cita"
-        ></textarea>
-      </frey-field>
+    <app-appointment-form (formGroupOutput)="formGroup = $event" class="card">
       <button class="home__btn-agendar" freyButton (click)="onSubmit()">Agendar</button>
       <button
         class="home__btn-agendar"
@@ -51,8 +14,6 @@
       >
         Cancelar
       </button>
-    </form>
+    </app-appointment-form>
   </div>
 </div>
-
-<frey-datepicker #datepicker> </frey-datepicker>

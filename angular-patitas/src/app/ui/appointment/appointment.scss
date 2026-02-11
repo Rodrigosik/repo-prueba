@@ -23,7 +23,7 @@
   width: 50%;
 }
 
-.card {
+::ng-deep app-appointment-form.card form {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
