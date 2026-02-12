@@ -4,6 +4,8 @@ import com.example.spring_patitas.domain.enums.AppointmentStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,15 +22,21 @@ import java.time.LocalTime;
 public class AppointmentRequest {
     
     @NotBlank(message = "Client name is required")
-    @Schema(description = "Nombre completo del cliente", example = "Juan Pérez", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Size(max = 50, message = "Client name must not exceed 50 characters")
+    @Pattern(regexp = "^[A-ZÁÉÍÓÚa-zñáéíóúÑüÜ ]+$", message = "Client name contains invalid characters")
+    @Schema(description = "Nombre completo del cliente (máximo 50 caracteres, solo letras, espacios, guiones y apóstrofes)", example = "Juan Pérez", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 50)
     private String clientName;
     
     @NotBlank(message = "Pet name is required")
-    @Schema(description = "Nombre de la mascota", example = "Max", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Size(max = 50, message = "Pet name must not exceed 50 characters")
+    @Pattern(regexp = "^[A-ZÁÉÍÓÚa-zñáéíóúÑüÜ ]+$", message = "Pet name contains invalid characters")
+    @Schema(description = "Nombre de la mascota (máximo 50 caracteres, solo letras, espacios, guiones y apóstrofes)", example = "Max", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 50)
     private String petName;
     
     @NotBlank(message = "Reason is required")
-    @Schema(description = "Motivo o razón de la cita", example = "Vacunación anual y chequeo general", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Size(max = 500, message = "Reason must not exceed 500 characters")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9., ]+$", message = "Reason contains invalid characters")
+    @Schema(description = "Motivo o razón de la cita (máximo 500 caracteres, solo letras, números, espacios, puntos y comas)", example = "Vacunación anual y chequeo general", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 500)
     private String reason;
     
     @NotNull(message = "Date is required")
