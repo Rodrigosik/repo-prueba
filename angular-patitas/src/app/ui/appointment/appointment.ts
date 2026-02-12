@@ -46,6 +46,7 @@ export class AppointmentComponent {
     this.appointmentsService.postAppointment(body).subscribe({
       next: response => {
         this.alertService.successAlert('Cita creada exitosamente');
+        this.formGroup.reset();
       },
     });
   }

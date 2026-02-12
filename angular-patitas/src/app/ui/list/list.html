@@ -76,6 +76,7 @@
         <td *freyCellDef="let item">
           <div class="table-actions">
             <button
+              freyTooltip="Terminar cita"
               freyButton
               variant="ghost"
               [iconOnly]="true"
@@ -89,6 +90,7 @@
               variant="ghost"
               [iconOnly]="true"
               (click)="onModalForm(item)"
+              freyTooltip="Ver detalles"
             >
               <i class="ms-outlined">visibility</i>
             </button>

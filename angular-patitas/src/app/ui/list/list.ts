@@ -9,6 +9,7 @@ import {
   FreyHeaderCellDefDirective,
   FreyTableComponent,
 } from 'freya/table';
+import { FreyTooltipDirective } from 'freya/tooltip';
 import { Observable } from 'rxjs';
 import { AlertService, Appointment, AppointmentsService } from 'src/app/core/services';
 import {
@@ -32,6 +33,7 @@ import { AppointmentModalData } from 'src/app/shared/components/appointment-form
     DatePipe,
     SlicePipe,
     ButtonBackComponent,
+    FreyTooltipDirective,
   ],
   templateUrl: './list.html',
   styleUrl: './list.scss',
