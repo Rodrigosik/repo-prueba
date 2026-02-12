@@ -20,14 +20,14 @@ public class AppointmentMapper {
     }
     
     public Appointment toDomain(AppointmentEntity entity) {
-        return Appointment.builder()
-                .id(entity.getId())
-                .clientName(entity.getClientName())
-                .petName(entity.getPetName())
-                .reason(entity.getReason())
-                .date(entity.getDate())
-                .time(entity.getTime())
-                .status(entity.getStatus())
-                .build();
+        return Appointment.reconstitute(
+                entity.getId(),
+                entity.getClientName(),
+                entity.getPetName(),
+                entity.getReason(),
+                entity.getDate(),
+                entity.getTime(),
+                entity.getStatus()
+        );
     }
 }

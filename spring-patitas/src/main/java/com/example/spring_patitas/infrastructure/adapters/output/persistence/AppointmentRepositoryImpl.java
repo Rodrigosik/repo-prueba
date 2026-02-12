@@ -1,8 +1,6 @@
 package com.example.spring_patitas.infrastructure.adapters.output.persistence;
 
 import com.example.spring_patitas.domain.entities.Appointment;
-import com.example.spring_patitas.domain.enums.AppointmentStatus;
-import com.example.spring_patitas.domain.exceptions.AppointmentNotFoundException;
 import com.example.spring_patitas.domain.repositories.AppointmentRepository;
 import com.example.spring_patitas.infrastructure.adapters.output.persistence.entities.AppointmentEntity;
 import com.example.spring_patitas.infrastructure.adapters.output.persistence.mappers.AppointmentMapper;
@@ -39,17 +37,6 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         return jpaRepository.findAll().stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
-    }
-    
-    @Override
-    public Appointment updateStatus(Long id, AppointmentStatus status) {
-        AppointmentEntity entity = jpaRepository.findById(id)
-                .orElseThrow(() -> new AppointmentNotFoundException(id));
-        
-        entity.setStatus(status);
-        AppointmentEntity updatedEntity = jpaRepository.save(entity);
-        
-        return mapper.toDomain(updatedEntity);
     }
     
     @Override

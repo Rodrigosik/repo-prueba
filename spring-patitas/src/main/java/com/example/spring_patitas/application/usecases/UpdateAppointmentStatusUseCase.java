@@ -1,8 +1,10 @@
 package com.example.spring_patitas.application.usecases;
 
 import com.example.spring_patitas.application.dto.AppointmentResponse;
+import com.example.spring_patitas.application.mappers.AppointmentDtoMapper;
 import com.example.spring_patitas.domain.entities.Appointment;
 import com.example.spring_patitas.domain.enums.AppointmentStatus;
+import com.example.spring_patitas.domain.exceptions.AppointmentNotFoundException;
 import com.example.spring_patitas.domain.repositories.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,22 +14,17 @@ import org.springframework.stereotype.Service;
 public class UpdateAppointmentStatusUseCase {
     
     private final AppointmentRepository appointmentRepository;
+    private final AppointmentDtoMapper mapper;
     
     public AppointmentResponse execute(Long id, AppointmentStatus status) {
-        Appointment updatedAppointment = appointmentRepository.updateStatus(id, status);
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new AppointmentNotFoundException(id));
         
-        return mapToResponse(updatedAppointment);
-    }
-    
-    private AppointmentResponse mapToResponse(Appointment appointment) {
-        return AppointmentResponse.builder()
-                .id(appointment.getId())
-                .clientName(appointment.getClientName())
-                .petName(appointment.getPetName())
-                .reason(appointment.getReason())
-                .date(appointment.getDate())
-                .time(appointment.getTime())
-                .status(appointment.getStatus())
-                .build();
+        // La lógica de negocio está en el dominio
+        appointment.updateStatus(status);
+        
+        Appointment updatedAppointment = appointmentRepository.save(appointment);
+        
+        return mapper.toResponse(updatedAppointment);
     }
 }
