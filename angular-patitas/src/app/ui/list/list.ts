@@ -18,6 +18,7 @@ import {
   TableManagerComponent,
 } from 'src/app/shared/components';
 import { AppointmentModalData } from 'src/app/shared/components/appointment-form/appointment-form';
+import { AppointmentStatusEnum } from 'src/app/utils/enums';
 
 @Component({
   selector: 'app-list',
@@ -81,14 +82,16 @@ export class ListComponent implements OnInit {
   }
 
   private closeAppointment(id: number): void {
-    this.appointmentsService.updateAppointmentStatus(id, 'COMPLETED').subscribe({
-      next: () => {
-        this.getAppointments();
-        this.alertService.successAlert(
-          'Cita terminada',
-          'La cita ha sido marcada como completada.'
-        );
-      },
-    });
+    this.appointmentsService
+      .updateAppointmentStatus(id, AppointmentStatusEnum.COMPLETED)
+      .subscribe({
+        next: () => {
+          this.getAppointments();
+          this.alertService.successAlert(
+            'Cita terminada',
+            'La cita ha sido marcada como completada.'
+          );
+        },
+      });
   }
 }

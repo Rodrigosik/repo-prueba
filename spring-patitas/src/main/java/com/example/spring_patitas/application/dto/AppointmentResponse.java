@@ -35,6 +35,6 @@ public class AppointmentResponse {
     @Schema(description = "Hora de la cita", example = "10:30:00")
     private LocalTime time;
     
-    @Schema(description = "Estado actual de la cita", example = "PENDING", allowableValues = {"PENDING", "CONFIRMED", "IN_PROGRESS", "COMPLETED", "CANCELLED"})
+    @Schema(description = "Estado actual de la cita", example = "PENDING", allowableValues = {"PENDING", "COMPLETED"})
     private AppointmentStatus status;
 }

@@ -106,7 +106,7 @@ public class AppointmentController {
     @PatchMapping("/{id}/status")
     @Operation(
         summary = "Actualizar estado de una cita",
-        description = "Cambia el estado de una cita existente (PENDING, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED)"
+        description = "Cambia el estado de una cita existente ( PENDING, COMPLETED)"
     )
     @ApiResponses(value = {
         @ApiResponse(
@@ -125,7 +125,7 @@ public class AppointmentController {
             @RequestParam @Parameter(
                 description = "Nuevo estado de la cita",
                 example = "CONFIRMED",
-                schema = @Schema(allowableValues = {"PENDING", "CONFIRMED", "IN_PROGRESS", "COMPLETED", "CANCELLED"})
+                schema = @Schema(allowableValues = {"PENDING", "COMPLETED"})
             ) AppointmentStatus status) {
         AppointmentResponse response = updateAppointmentStatusUseCase.execute(id, status);
         return ResponseEntity.ok(response);

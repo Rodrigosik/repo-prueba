@@ -52,22 +52,11 @@ public class Appointment {
         }
     }
 
-    public void confirm() {
-        this.status = AppointmentStatus.CONFIRMED;
-    }
-
-    public void startProgress() {
-        this.status = AppointmentStatus.IN_PROGRESS;
-    }
-
     public void complete() {
         this.status = AppointmentStatus.COMPLETED;
     }
 
-    public void cancel() {
-        this.status = AppointmentStatus.CANCELLED;
-    }
-
+   
     public void updateStatus(AppointmentStatus newStatus) {
         if (newStatus == null) {
             throw new IllegalArgumentException("Status cannot be null");
@@ -79,19 +68,7 @@ public class Appointment {
         return this.status == AppointmentStatus.PENDING;
     }
 
-    public boolean isConfirmed() {
-        return this.status == AppointmentStatus.CONFIRMED;
-    }
-
     public boolean isCompleted() {
         return this.status == AppointmentStatus.COMPLETED;
-    }
-
-    public boolean isCancelled() {
-        return this.status == AppointmentStatus.CANCELLED;
-    }
-
-    public boolean isActive() {
-        return this.status != AppointmentStatus.COMPLETED && this.status != AppointmentStatus.CANCELLED;
-    }
+    }  
 }
