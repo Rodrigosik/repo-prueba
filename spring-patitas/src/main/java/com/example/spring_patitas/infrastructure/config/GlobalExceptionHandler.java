@@ -3,6 +3,7 @@ package com.example.spring_patitas.infrastructure.config;
 import com.example.spring_patitas.domain.exceptions.AppointmentNotFoundException;
 import com.example.spring_patitas.domain.exceptions.DuplicateAppointmentException;
 import com.example.spring_patitas.domain.exceptions.InvalidTimeSlotException;
+import com.example.spring_patitas.domain.exceptions.PastAppointmentException;
 import com.example.spring_patitas.infrastructure.config.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidTimeSlotException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTimeSlot(
             InvalidTimeSlotException ex,
+            HttpServletRequest request) {
+        ErrorResponse error = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error("Bad Request")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+    
+    @ExceptionHandler(PastAppointmentException.class)
+    public ResponseEntity<ErrorResponse> handlePastAppointment(
+            PastAppointmentException ex,
             HttpServletRequest request) {
         ErrorResponse error = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())

@@ -38,17 +38,20 @@ El proyecto implementa **Clean Architecture** (Arquitectura Limpia) dividida en 
   - `AppointmentNotFoundException`
   - `DuplicateAppointmentException`
   - `InvalidTimeSlotException`
+  - `PastAppointmentException`
 - **Repositories**: Interfaces de repositorios (puerto de salida)
 
 **Reglas de Negocio en el Dominio:**
 - Las citas solo pueden agendarse en intervalos de 30 minutos (09:00, 09:30, 10:00, etc.)
-- No se permiten citas duplicadas en la misma fecha y hora
-- Validación de slots de tiempo al crear una cita
+- Validación de slots de tiempo (invariante del dominio)
 - Control de estados de citas (PENDING ↔ COMPLETED)
 
 #### 2. **Application Layer** (Aplicación)
 - **Use Cases**: Casos de uso que orquestan la lógica de negocio
   - `CreateAppointmentUseCase`: Crear nueva cita
+    - Valida que no se agenden citas en fechas pasadas
+    - Valida que para el día actual la hora sea al menos 30 minutos después
+    - Valida que no existan citas duplicadas en la misma fecha y hora
   - `GetAppointmentUseCase`: Obtener cita por ID
   - `GetAllAppointmentsUseCase`: Listar todas las citas
   - `UpdateAppointmentStatusUseCase`: Actualizar estado de cita
@@ -128,7 +131,8 @@ spring-patitas/
 │   │   │   │   ├── exceptions/
 │   │   │   │   │   ├── AppointmentNotFoundException.java
 │   │   │   │   │   ├── DuplicateAppointmentException.java
-│   │   │   │   │   └── InvalidTimeSlotException.java
+│   │   │   │   │   ├── InvalidTimeSlotException.java
+│   │   │   │   │   └── PastAppointmentException.java
 │   │   │   │   └── repositories/
 │   │   │   │       └── AppointmentRepository.java
 │   │   │   │
@@ -312,8 +316,10 @@ PATCH /api/appointments/{id}/status?status=COMPLETED
 
 1. **No Duplicación**: No se permiten dos citas en la misma fecha y hora
 2. **Slots de Tiempo**: Solo se aceptan horas en punto o media (validación en dominio)
-3. **Estados Válidos**: Solo PENDING y COMPLETED
-4. **Estado Inicial**: Toda cita nueva se crea con estado PENDING
+3. **No Citas en el Pasado**: No se pueden agendar citas en fechas pasadas ni en horas ya transcurridas del día actual
+4. **Hora Mínima**: Para el día actual, la cita debe ser al menos 30 minutos después de la hora actual
+5. **Estados Válidos**: Solo PENDING y COMPLETED
+6. **Estado Inicial**: Toda cita nueva se crea con estado PENDING
 
 ---
 
@@ -342,6 +348,7 @@ El sistema utiliza un manejador global de excepciones que devuelve respuestas es
 | **404** | `AppointmentNotFoundException` | Cita no encontrada con el ID proporcionado |
 | **409** | `DuplicateAppointmentException` | Ya existe una cita en esa fecha y hora |
 | **400** | `InvalidTimeSlotException` | La hora no está en intervalos de 30 minutos |
+| **400** | `PastAppointmentException` | Intento de agendar cita en el pasado o sin tiempo mínimo |
 | **400** | `MethodArgumentNotValidException` | Errores de validación de campos |
 | **500** | `Exception` | Error interno del servidor |
 
@@ -377,6 +384,17 @@ El sistema utiliza un manejador global de excepciones que devuelve respuestas es
   "error": "Not Found",
   "message": "Appointment not found with id: 99",
   "path": "/api/appointments/99"
+}
+```
+
+**Cita en el Pasado:**
+```json
+{
+  "timestamp": "2026-02-12T10:30:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "No se puede agendar una cita en el pasado. La fecha y hora seleccionadas (12/02/2026 10:00) ya han transcurrido. La hora mínima disponible para hoy es 10:30.",
+  "path": "/api/appointments"
 }
 ```
 
