@@ -6,7 +6,7 @@
       formControlName="clientName"
       placeholder="Ingresa tu nombre"
       [readonly]="_isReadOnly()"
-      freyInputValidation="name"
+      freyInputValidation="alphanumeric"
       [maxlength]="50"
     />
   </frey-field>
@@ -17,7 +17,7 @@
       formControlName="petName"
       placeholder="Ingresa el nombre de tu mascota"
       [readonly]="_isReadOnly()"
-      freyInputValidation="name"
+      freyInputValidation="alphanumeric"
       [maxlength]="50"
     />
   </frey-field>
@@ -42,7 +42,9 @@
     maxTime="18:00:00"
     [readonly]="_isReadOnly()"
   >
-    <frey-label> Hora</frey-label>
+    <frey-label>
+      Hora <span class="hint">(Horario de atención 09:00 AM - 06:00 PM)</span></frey-label
+    >
   </frey-timepicker>
 
   <frey-field>
@@ -56,7 +58,7 @@
       formControlName="reason"
       placeholder="Ingresa la razón de la cita"
       [readonly]="_isReadOnly()"
-      freyInputValidation
+      freyInputValidation="alphanumeric"
       [maxlength]="500"
     ></textarea>
   </frey-field>
