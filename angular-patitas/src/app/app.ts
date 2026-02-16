@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoaderComponent } from './shared/components';
+import { ButtonBackComponent, LoaderComponent } from './shared/components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoaderComponent],
+  imports: [RouterOutlet, LoaderComponent, ButtonBackComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
